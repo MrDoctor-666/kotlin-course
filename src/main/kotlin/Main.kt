@@ -1,6 +1,6 @@
 
 
-fun main(args: Array<String>) {
+fun main() {
 
     val str = """- It's too long. By the time I've called look out, what's your name?
         |- Romanadvoratnelundar.

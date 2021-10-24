@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 
 internal class AlignedTextKtTest {
-    val strTest = """- It's too long. By the time I've called look out, what's your name?
+    private val strTest = """- It's too long. By the time I've called look out, what's your name?
         |- Romanadvoratnelundar.
         |- By the time I've called that out, you could be dead. I'll call you Romana.
     """.trimMargin()
