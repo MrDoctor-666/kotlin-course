@@ -10,12 +10,15 @@ fun alignText(
     text: String,
     lineWidth: Int = 120,
     alignment: Alignment = Alignment.LEFT
-) : String {
+): String {
+    //if the string is blank we can't really align it
+    if (text.isBlank()) throw Exception("The string is blank")
+
     val textInList = arrayListOf<String>()
     var curText = text
-    var indexToSplit : Int
+    var indexToSplit: Int
 
-    while (curText.isNotEmpty()){
+    while (curText.isNotEmpty()) {
         //find index of the last space
         //we will divide by it
         indexToSplit = curText.indexOf('\n')
@@ -23,25 +26,27 @@ fun alignText(
             if (curText.length > lineWidth) {
                 indexToSplit = curText.lastIndexOf(' ', lineWidth)
                 if (indexToSplit == -1) indexToSplit = lineWidth
-            }
-            else indexToSplit = curText.lastIndex + 1
+            } else indexToSplit = curText.lastIndex + 1
 
 
         //add spaces according to the alignment
         //and then add string to the list
-        when (alignment){
+        when (alignment) {
             Alignment.LEFT -> textInList.add(curText.substring(0, indexToSplit).padEnd(lineWidth, ' '))
             Alignment.RIGHT -> textInList.add(curText.substring(0, indexToSplit).padStart(lineWidth, ' '))
             Alignment.CENTER ->
                 //adding half of the spaces with pasStart, another half with padEnd
-                textInList.add(curText.substring(0, indexToSplit)
-                    .padStart(lineWidth - (lineWidth - indexToSplit)/2, ' ')
-                    .padEnd(lineWidth, ' '))
+                textInList.add(
+                    curText.substring(0, indexToSplit)
+                        .padStart(lineWidth - (lineWidth - indexToSplit) / 2, ' ')
+                        .padEnd(lineWidth, ' ')
+                )
         }
 
-        var firstIndex : Int = indexToSplit
+        var firstIndex: Int = indexToSplit
         while (curText.length > firstIndex &&
-            (curText[firstIndex] == ' ' || curText[firstIndex] == '\n')) firstIndex++
+            (curText[firstIndex] == ' ' || curText[firstIndex] == '\n')
+        ) firstIndex++
         curText = curText.substring(firstIndex)
         //if (curText.length > indexToSplit && indexToSplit != lineWidth) curText = curText.substring(firstIndex)
         //else curText = curText.substring(indexToSplit)

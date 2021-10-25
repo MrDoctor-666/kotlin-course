@@ -12,31 +12,36 @@ internal class AlignedTextKtTest {
 
     @Test
     fun emptyStringTest() {
-       assertEquals("", alignText("", 4, Alignment.LEFT))
+        try {
+            alignText("", 4, Alignment.LEFT)
+        } catch (e: Exception) {
+            assertEquals("The string is blank", e.message)
+        }
     }
 
     @Test
     fun simpleLeftTest() {
+        //multi string uses \n as line separator, so it's more simple to do just this
         val expected = "- It's too long. By the  " + System.lineSeparator() +
                 "time I've called look    " + System.lineSeparator() +
-                "out, what's your name?   " +System.lineSeparator() +
-                "- Romanadvoratnelundar.  " +System.lineSeparator() +
-                "- By the time I've called" +System.lineSeparator() +
-                "that out, you could be   " +System.lineSeparator() +
-                "dead. I'll call you      " +System.lineSeparator() +
+                "out, what's your name?   " + System.lineSeparator() +
+                "- Romanadvoratnelundar.  " + System.lineSeparator() +
+                "- By the time I've called" + System.lineSeparator() +
+                "that out, you could be   " + System.lineSeparator() +
+                "dead. I'll call you      " + System.lineSeparator() +
                 "Romana.                  "
         assertEquals(expected, alignText(strTest, 25, Alignment.LEFT))
     }
 
     @Test
     fun simpleRightTest() {
-        val expected = "  - It's too long. By the" +System.lineSeparator() +
-                "    time I've called look" +System.lineSeparator() +
-                "   out, what's your name?" +System.lineSeparator() +
-                "  - Romanadvoratnelundar." +System.lineSeparator() +
-                "- By the time I've called" +System.lineSeparator() +
-                "   that out, you could be" +System.lineSeparator() +
-                "      dead. I'll call you" +System.lineSeparator() +
+        val expected = "  - It's too long. By the" + System.lineSeparator() +
+                "    time I've called look" + System.lineSeparator() +
+                "   out, what's your name?" + System.lineSeparator() +
+                "  - Romanadvoratnelundar." + System.lineSeparator() +
+                "- By the time I've called" + System.lineSeparator() +
+                "   that out, you could be" + System.lineSeparator() +
+                "      dead. I'll call you" + System.lineSeparator() +
                 "                  Romana."
         assertEquals(expected, alignText(strTest, 25, Alignment.RIGHT))
     }
