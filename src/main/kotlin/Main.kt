@@ -7,4 +7,7 @@ fun main() {
     println(str + System.lineSeparator())
     println(lab1.alignText(str, 25, lab1.Alignment.CENTER) + System.lineSeparator())
 
+    val exp = lab2.Calculator("-2 + 2^5*(-(2 -3))/4")
+    println(exp.calc())
+
 }
