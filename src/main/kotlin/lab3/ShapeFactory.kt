@@ -38,14 +38,9 @@ class ShapeFactorImpl(private val maxRandomValue: Double = Double.MAX_VALUE) : S
         Rectangle(Random.nextDouble(until = maxRandomValue), Random.nextDouble(until = maxRandomValue))
 
     override fun createRandomTriangle(): Triangle {
-        var a = Random.nextDouble(until = maxRandomValue)
-        var b = Random.nextDouble(until = maxRandomValue)
-        var c = Random.nextDouble(until = maxRandomValue)
-        while (a + b <= c || a + c <= b || b + c <= a) {
-            a = Random.nextDouble(until = maxRandomValue)
-            b = Random.nextDouble(until = maxRandomValue)
-            c = Random.nextDouble(until = maxRandomValue)
-        }
+        val a = Random.nextDouble(until = maxRandomValue)
+        val b = Random.nextDouble(until = maxRandomValue)
+        val c = Random.nextDouble(kotlin.math.max(a, b) - kotlin.math.min(a, b), a + b)
         return Triangle(a, b, c)
     }
 

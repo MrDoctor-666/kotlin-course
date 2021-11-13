@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions.*
 import kotlin.math.PI
 
 internal class ShapeFactorImplTest {
-    val shapeFact = ShapeFactorImpl()
+    private val shapeFact = ShapeFactorImpl()
 
     @Test
     fun createCircle() {
