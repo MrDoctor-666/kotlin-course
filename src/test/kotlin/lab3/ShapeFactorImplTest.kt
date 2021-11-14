@@ -40,7 +40,7 @@ internal class ShapeFactorImplTest {
     fun createRandomCircle() {
         try {
             shapeFact.createRandomCircle()
-        } catch (e: Exception) {
+        } catch (e: IllegalArgumentException) {
             fail()
         }
     }
@@ -85,7 +85,7 @@ internal class ShapeFactorImplTest {
     fun wrongCircleCreation() {
         try {
             shapeFact.createCircle(-1.0)
-        } catch (e: Error) {
+        } catch (e: IllegalArgumentException) {
             assertEquals("Radius is negative", e.message)
         }
     }
@@ -94,7 +94,7 @@ internal class ShapeFactorImplTest {
     fun wrongTriangleCreation() {
         try {
             shapeFact.createTriangle(4.0, 6.0, 10.0)
-        } catch (e: Error) {
+        } catch (e: IllegalArgumentException) {
             assertEquals("Triangle doesn't exist", e.message)
         }
     }

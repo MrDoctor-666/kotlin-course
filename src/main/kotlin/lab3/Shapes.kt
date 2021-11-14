@@ -9,9 +9,9 @@ interface Shape {
     fun calcPerimeter(): Double
 }
 
-class Circle(private val radius: Double) : Shape {
+class Circle(val radius: Double) : Shape {
     init {
-        if (radius < 0) throw Error("Radius is negative")
+        if (radius < 0) throw IllegalArgumentException("Radius is negative")
     }
 
     override fun calcArea(): Double = PI * radius.pow(2)
@@ -20,9 +20,9 @@ class Circle(private val radius: Double) : Shape {
 
 }
 
-class Square(private val a: Double) : Shape {
+class Square(val a: Double) : Shape {
     init {
-        if (a < 0) throw Error("Side is negative")
+        if (a < 0) throw IllegalArgumentException("Side is negative")
     }
 
     override fun calcArea(): Double = a.pow(2)
@@ -31,9 +31,9 @@ class Square(private val a: Double) : Shape {
 
 }
 
-class Rectangle(private val a: Double, private val b: Double) : Shape {
+class Rectangle(val a: Double, val b: Double) : Shape {
     init {
-        if (a < 0 || b < 0) throw Error("Side is negative")
+        if (a < 0 || b < 0) throw IllegalArgumentException("Side is negative")
     }
 
     override fun calcArea(): Double = a * b
@@ -43,13 +43,13 @@ class Rectangle(private val a: Double, private val b: Double) : Shape {
 }
 
 class Triangle(
-    private val a: Double,
-    private val b: Double,
-    private val c: Double
+    val a: Double,
+    val b: Double,
+    val c: Double
 ) : Shape {
     init {
-        if (a < 0 || b < 0 || c < 0) throw Error("Side is negative")
-        if (a + b <= c || a + c <= b || b + c <= a) throw  Error("Triangle doesn't exist")
+        if (a < 0 || b < 0 || c < 0) throw IllegalArgumentException("Side is negative")
+        if (a + b <= c || a + c <= b || b + c <= a) throw  IllegalArgumentException("Triangle doesn't exist")
     }
 
     override fun calcArea(): Double {

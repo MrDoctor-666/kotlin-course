@@ -4,10 +4,10 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 interface ShapeFactory {
-    fun createCircle(_radius: Double): Circle
-    fun createSquare(_side: Double): Square
-    fun createRectangle(_width: Double, _length: Double): Rectangle
-    fun createTriangle(_sideA: Double, _sideB: Double, _sideC: Double): Triangle
+    fun createCircle(radius: Double): Circle
+    fun createSquare(side: Double): Square
+    fun createRectangle(width: Double, length: Double): Rectangle
+    fun createTriangle(sideA: Double, sideB: Double, sideC: Double): Triangle
 
     fun createRandomCircle(): Circle
     fun createRandomSquare(): Square
@@ -18,14 +18,14 @@ interface ShapeFactory {
 }
 
 class ShapeFactorImpl(private val maxRandomValue: Double = Double.MAX_VALUE) : ShapeFactory {
-    override fun createCircle(_radius: Double): Circle = Circle(_radius)
+    override fun createCircle(radius: Double): Circle = Circle(radius)
 
-    override fun createSquare(_side: Double): Square = Square(_side)
+    override fun createSquare(side: Double): Square = Square(side)
 
-    override fun createRectangle(_width: Double, _length: Double): Rectangle = Rectangle(_width, _length)
+    override fun createRectangle(width: Double, length: Double): Rectangle = Rectangle(width, length)
 
-    override fun createTriangle(_sideA: Double, _sideB: Double, _sideC: Double): Triangle {
-        return Triangle(_sideA, _sideB, _sideC)
+    override fun createTriangle(sideA: Double, sideB: Double, sideC: Double): Triangle {
+        return Triangle(sideA, sideB, sideC)
     }
 
     override fun createRandomCircle(): Circle =
