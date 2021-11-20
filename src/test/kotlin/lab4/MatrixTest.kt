@@ -23,7 +23,12 @@ internal class MatrixTest {
         } catch (ex: IllegalArgumentException) {
             assertEquals("Matrix is wrong-sized", ex.message)
         }
+    }
 
+    @Test
+    fun initRight() {
+        arr[0][0] = 0.0
+        assertEquals(1.0, matrixA[0, 0])
     }
 
     @Test

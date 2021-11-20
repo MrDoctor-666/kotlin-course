@@ -7,17 +7,19 @@ class Matrix(matrixContents: Array<Array<Double>>) {
         val length = matrixContents[0].size
         matrix = Array(matrixContents.size) { i ->
             if (matrixContents[i].size != length) throw IllegalArgumentException("Matrix is wrong-sized")
-            matrixContents[i]
+            matrixContents[i].clone()
         }
     }
 
     operator fun get(i: Int, j: Int): Double {
-        if (i >= matrix.size || j >= matrix[0].size) throw ArrayIndexOutOfBoundsException("Matrix index out of bounds")
+        if (i >= matrix.size) throw ArrayIndexOutOfBoundsException("Matrix index out of bounds. Index i is $i and size is ${matrix.size}")
+        if (j >= matrix[0].size) throw ArrayIndexOutOfBoundsException("Matrix index out of bounds. Index j is $j and size is ${matrix[0].size}")
         return matrix[i][j]
     }
 
     operator fun set(i: Int, j: Int, value: Double) {
-        if (i >= matrix.size || j >= matrix[0].size) throw ArrayIndexOutOfBoundsException("Matrix index out of bounds")
+        if (i >= matrix.size) throw ArrayIndexOutOfBoundsException("Matrix index out of bounds. Index i is $i and size is ${matrix.size}")
+        if (j >= matrix[0].size) throw ArrayIndexOutOfBoundsException("Matrix index out of bounds. Index j is $j and size is ${matrix[0].size}")
         matrix[i][j] = value
     }
 
@@ -122,10 +124,7 @@ class Matrix(matrixContents: Array<Array<Double>>) {
     override fun equals(other: Any?): Boolean {
         if (other == null || other !is Matrix || other.getDimensions() != this.getDimensions()) return false
 
-        for (i in matrix.indices)
-            for (j in matrix[i].indices)
-                if (this[i, j] != other[i, j]) return false
-        return true
+        return matrix.contentDeepEquals(other.matrix)
     }
 
     override fun toString(): String {
