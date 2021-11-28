@@ -1,5 +1,6 @@
 package lab5
 
+import java.lang.IllegalStateException
 import java.time.Year
 
 class Library : LibraryService {
@@ -42,32 +43,32 @@ class Library : LibraryService {
         return bookStatuses[book]!!
     }
 
-    override fun getAllBookStatuses(): Map<Book, BookStatus> = bookStatuses
+    override fun getAllBookStatuses(): Map<Book, BookStatus> = bookStatuses.toMap()
 
     override fun setBookStatus(book: Book, status: BookStatus) {
-        if (!bookStatuses.contains(book)) throw IllegalArgumentException("This book is not in the library")
+        if (!bookStatuses.contains(book)) throw IllegalStateException("This book is not in the library")
         bookStatuses.replace(book, status)
     }
 
     override fun addBook(book: Book, status: BookStatus) {
-        if (bookStatuses.keys.contains(book)) throw IllegalArgumentException("This book exists in the library")
+        if (bookStatuses.keys.contains(book)) throw IllegalStateException("This book exists in the library")
         bookStatuses[book] = status
         //bookList.add(book)
     }
 
     override fun registerUser(user: User) {
-        if (userList.contains(user)) throw IllegalArgumentException("This user exists")
+        if (userList.contains(user)) throw IllegalStateException("This user exists")
         userList.add(user)
     }
 
     override fun unregisterUser(user: User) {
-        if (!userList.contains(user)) throw IllegalArgumentException("This user doesn't exist")
+        if (!userList.contains(user)) throw IllegalStateException("This user doesn't exist")
         userList.remove(user)
     }
 
     override fun takeBook(user: User, book: Book) {
-        if (!userList.contains(user)) throw IllegalArgumentException("This user is unregister")
-        if (!bookStatuses.contains(book) || bookStatuses[book] !is BookStatus.Available) throw IllegalArgumentException(
+        if (!userList.contains(user)) throw IllegalStateException("This user is unregister")
+        if (!bookStatuses.contains(book) || bookStatuses[book] !is BookStatus.Available) throw IllegalStateException(
             "Book can't be given"
         )
 
@@ -81,8 +82,8 @@ class Library : LibraryService {
     }
 
     override fun returnBook(book: Book) {
-        if (!bookStatuses.contains(book)) throw IllegalArgumentException("This book doesn't exist in the library")
-        if (bookStatuses[book] !is BookStatus.UsedBy) throw IllegalArgumentException("This book is not taken")
+        if (!bookStatuses.contains(book)) throw IllegalStateException("This book doesn't exist in the library")
+        if (bookStatuses[book] !is BookStatus.UsedBy) throw IllegalStateException("This book is not taken")
 
         bookStatuses.replace(book, BookStatus.Available)
     }
